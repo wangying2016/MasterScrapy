@@ -66,6 +66,7 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'Chapter8_toscrape_book.pipelines.BookPipeline': 300,
+    'Chapter8_toscrape_book.pipelines.MySQLPipeline': 500
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,7 +90,12 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-# Feed export fileds.
+# Feed export settings.
+FEED_URI = 'export_data/%(name)s.xls'
+FEED_FORMAT = 'excel'
+FEED_EXPORTERS = {
+    'excel': 'Chapter8_toscrape_book.my_exporters.ExcelItemExporter'
+}
 FEED_EXPORT_FIELDS = [
     'upc',
     'name',
@@ -98,3 +104,10 @@ FEED_EXPORT_FIELDS = [
     'review_rating',
     'review_num'
 ]
+
+# MySQL settings.
+MYSQL_DB_NAME = 'crawl_book'
+MYSQL_PORT = '3306'
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD ='123456'

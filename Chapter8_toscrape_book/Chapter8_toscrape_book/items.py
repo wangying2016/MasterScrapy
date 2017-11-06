@@ -16,3 +16,4 @@ class BookItem(scrapy.Item):
     upc = scrapy.Field()                # 产品编码
     stock = scrapy.Field()               # 库存量
 
+
